@@ -1,2 +1,8 @@
 pandas>=1.1.0
 textblob>=0.15.3
+numpy
+matplotlib
+seaborn
+sklearn
+nltk
+wordcloud
