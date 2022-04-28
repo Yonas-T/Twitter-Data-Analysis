@@ -27,17 +27,6 @@ class TestCleanTweetsDataframe(unittest.TestCase):
         df = self.cleaner.convert_to_datetime(self.df)
         self.assertTrue(type(df['created_at'].dtype == ptypes.DatetimeTZDtype))
 
-    def test_convert_to_datetime(self):
-        df = self.cleaner.convert_to_numbers(self.df)
-        self.assertTrue(
-            ptypes.is_numeric_dtype(df['polarity']))
-        self.assertTrue(
-            ptypes.is_numeric_dtype(df['subjectivity']))
-        self.assertTrue(
-            ptypes.is_numeric_dtype(df['retweet_count']))
-        self.assertTrue(
-            ptypes.is_numeric_dtype(df['favorite_count']))
-
     def test_remove_non_english_tweets(self):
         df = self.cleaner.remove_non_english_tweets(self.df)
         df = df[df['lang'] != 'en']
