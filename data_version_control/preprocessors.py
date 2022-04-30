@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import nltk
+from streamlit_dashboard.db import createDB, createTables, insert_to_tweet_table
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.classify import SklearnClassifier
@@ -140,3 +141,21 @@ class ExtractFeatures:
         for word in w_features:
             features['contains(%s)' % word] = (word in document_words)
         return features
+
+class StoreInDatabase:
+    """
+    Stores the categorized data in database.
+    """
+    def __init__(self, dataframe, tableName, dbName):
+        self.dataframe = dataframe
+        self.tableName = tableName
+        self.dbName = dbName
+
+
+    def store(self):
+        """
+        Stores the categorized data in database.
+        """
+        createDB(self.tableName)
+        createTables(self.tableName)
+        insert_to_tweet_table(self.dbName, self.tableName, self.dataframe)
