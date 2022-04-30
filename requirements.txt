@@ -6,3 +6,4 @@ seaborn
 sklearn
 nltk
 wordcloud
+mysql
